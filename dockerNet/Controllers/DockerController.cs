@@ -21,7 +21,7 @@ namespace dockerNet.Controllers
         }
 
         [HttpPost("generarToken")]
-        public string punto4(User user)
+        public string punto4([FromBody]User user)
         {
             string token = _user.GenerarToken(user);
             return token;
