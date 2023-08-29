@@ -5,6 +5,8 @@ import { Code } from './enum/code.enum';
 import { HttpResponse } from './domain/response';
 import { Status } from './enum/status.enum';
 import { patientRoutes } from './routes/patient.routes';
+import { userRoutes } from './routes/user.routes';
+
 
 export class App {
   private readonly app: Application;
@@ -33,6 +35,7 @@ export class App {
 
   private routes(): void {
     this.app.use('/patients', patientRoutes);
+    this.app.use('/users', userRoutes);
     this.app.get('/', (req, res) =>
       res
         .status(Code.OK)
@@ -44,6 +47,10 @@ export class App {
           )
         )
     );
+
+
+
+
     this.app.all('*', (req, res) =>
       res
         .status(Code.NOT_FOUND)

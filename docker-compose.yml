@@ -38,9 +38,18 @@ services:
       SERVER_PORT: 3000
       SERVICE_TAGS: prod
       SERVICE_NAME: nodeappserver
+      TOKEN_SECRET: secreto
+    networks:
+      - net
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
     networks:
       - net
 networks:
   net:
     driver: bridge
-      
