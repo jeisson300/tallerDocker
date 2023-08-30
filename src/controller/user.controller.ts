@@ -7,25 +7,24 @@ import { HttpResponse } from '../domain/response';
 import { Status } from '../enum/status.enum';
 import { FieldPacket, ResultSetHeader, RowDataPacket } from 'mysql2';
 import { OkPacket } from 'mysql2';
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
 import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
 
 type ResultSet = [
   RowDataPacket[] | RowDataPacket[] | OkPacket | OkPacket[] | ResultSetHeader,
   FieldPacket[]
 ];
 
-
 export const createUser = async (
   req: Request,
   res: Response
 ): Promise<Response<User>> => {
   console.info(
-    `[${new Date().toLocaleString()}] Incoming ${req.method}${req.originalUrl
+    `[${new Date().toLocaleString()}] Incoming ${req.method}${
+      req.originalUrl
     } Request from ${req.rawHeaders[0]} ${req.rawHeaders[1]}`
   );
   let user: User = { ...req.body };
@@ -39,16 +38,10 @@ export const createUser = async (
     );
     user = { id: (result[0] as ResultSetHeader).insertId, ...req.body };
 
-
     return res
       .status(Code.CREATED)
       .send(
-        new HttpResponse(
-          Code.CREATED,
-          Status.CREATED,
-          'Patients created',
-          user
-        )
+        new HttpResponse(Code.CREATED, Status.CREATED, 'Users created', user)
       );
   } catch (error: unknown) {
     console.error(error);
@@ -64,36 +57,203 @@ export const createUser = async (
   }
 };
 
-
 export const loginUser = async (
   req: Request,
   res: Response
 ): Promise<Response<User>> => {
   // validaciones
 
-
   const pool = await connection();
-  const result: ResultSet = await pool.query(
-    QUERY.USER_BY_EMAIL,
-    [req.body.email]
-  );
+  const result: ResultSet = await pool.query(QUERY.USER_BY_EMAIL, [
+    req.body.email,
+  ]);
 
   const usersData = result[0] as Array<User>;
 
-  if ((result[0] as Array<ResultSet>).length == 0) return res.status(400).json({ error: 'contraseña no válida' })
+  if ((result[0] as Array<ResultSet>).length == 0)
+    return res.status(400).json({ error: 'contraseña no válida' });
   let user: User = usersData[0];
 
-
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).json({ error: 'contraseña no válida' })
+  if (!validPassword)
+    return res.status(400).json({ error: 'contraseña no válida' });
   // create token
-  const token = jwt.sign({
-    name: user.first_name,
-    id: user.id
-  }, "secreto")
+  const token = jwt.sign(
+    {
+      name: user.first_name,
+      id: user.id,
+    },
+    'secreto'
+  );
 
   return res.header('auth-token', token).json({
     error: null,
-    data: { token }
-  })
-}
+    data: { token },
+  });
+};
+
+export const getUsers = async (
+  req: Request,
+  res: Response
+): Promise<Response<User[]>> => {
+  console.info(
+    `[${new Date().toLocaleString()}] Incoming ${req.method}${
+      req.originalUrl
+    } Request from ${req.rawHeaders[0]} ${req.rawHeaders[1]}`
+  );
+  try {
+    const pool = await connection();
+    const result: ResultSet = await pool.query(QUERY.SELECT_USERS);
+    const UsersData = result[0] as Array<User>;
+    return res
+      .status(Code.OK)
+      .send(
+        new HttpResponse(Code.OK, Status.OK, 'Users retrieved', UsersData[0])
+      );
+  } catch (error: unknown) {
+    console.error(error);
+    return res
+      .status(Code.INTERNAL_SERVER_ERROR)
+      .send(
+        new HttpResponse(
+          Code.INTERNAL_SERVER_ERROR,
+          Status.INTERNAL_SERVER_ERROR,
+          'An error occurred'
+        )
+      );
+  }
+};
+
+export const getUser = async (
+  req: Request,
+  res: Response
+): Promise<Response<User[]>> => {
+  console.info(
+    `[${new Date().toLocaleString()}] Incoming ${req.method}${
+      req.originalUrl
+    } Request from ${req.rawHeaders[0]} ${req.rawHeaders[1]}`
+  );
+  try {
+    const pool = await connection();
+    const result: ResultSet = await pool.query(QUERY.SELECT_USER, [
+      req.params.UserId,
+    ]);
+    const UsersData = result[0] as Array<User>;
+    if ((result[0] as Array<ResultSet>).length > 0) {
+      return res
+        .status(Code.OK)
+        .send(
+          new HttpResponse(Code.OK, Status.OK, 'Users retrieved', UsersData[0])
+        );
+    } else {
+      return res
+        .status(Code.BAD_REQUEST)
+        .send(
+          new HttpResponse(
+            Code.BAD_REQUEST,
+            Status.BAD_REQUEST,
+            'User not found'
+          )
+        );
+    }
+  } catch (error: unknown) {
+    console.error(error);
+    return res
+      .status(Code.INTERNAL_SERVER_ERROR)
+      .send(
+        new HttpResponse(
+          Code.INTERNAL_SERVER_ERROR,
+          Status.INTERNAL_SERVER_ERROR,
+          'An error occurred'
+        )
+      );
+  }
+};
+
+export const updateUser = async (
+  req: Request,
+  res: Response
+): Promise<Response<User>> => {
+  console.info(
+    `[${new Date().toLocaleString()}] Incoming ${req.method}${
+      req.originalUrl
+    } Request from ${req.rawHeaders[0]} ${req.rawHeaders[1]}`
+  );
+  let User: User = { ...req.body };
+  try {
+    const pool = await connection();
+    const result: ResultSet = await pool.query(QUERY.SELECT_USER, [
+      req.params.UserId,
+    ]);
+
+    if ((result[0] as Array<ResultSet>).length > 0) {
+      const result: ResultSet = await pool.query(QUERY.UPDATE_USERS, [
+        ...Object.values(User),
+        req.params.UserId,
+      ]);
+      return res.status(Code.OK).send(
+        new HttpResponse(Code.OK, Status.OK, 'Users updated', {
+          ...User,
+          id: req.params.Userid,
+        })
+      );
+    } else {
+      return res
+        .status(Code.OK)
+        .send(new HttpResponse(Code.OK, Status.OK, 'User not found'));
+    }
+  } catch (error: unknown) {
+    console.error(error);
+    return res
+      .status(Code.INTERNAL_SERVER_ERROR)
+      .send(
+        new HttpResponse(
+          Code.INTERNAL_SERVER_ERROR,
+          Status.INTERNAL_SERVER_ERROR,
+          'An error occurred'
+        )
+      );
+  }
+};
+
+export const deleteUser = async (
+  req: Request,
+  res: Response
+): Promise<Response<User[]>> => {
+  console.info(
+    `[${new Date().toLocaleString()}] Incoming ${req.method}${
+      req.originalUrl
+    } Request from ${req.rawHeaders[0]} ${req.rawHeaders[1]}`
+  );
+  try {
+    const pool = await connection();
+    const result: ResultSet = await pool.query(QUERY.DELETE_USERS, [
+      req.params.UserId,
+    ]);
+    const UsersData = result[0] as Array<User>;
+    if ((result[0] as Array<ResultSet>).length > 0) {
+      return res
+        .status(Code.OK)
+        .send(
+          new HttpResponse(Code.OK, Status.OK, 'Users retrieved', UsersData[0])
+        );
+    } else {
+      return res
+        .status(Code.NOT_FOUND)
+        .send(
+          new HttpResponse(Code.NOT_FOUND, Status.NOT_FOUND, 'User not found')
+        );
+    }
+  } catch (error: unknown) {
+    console.error(error);
+    return res
+      .status(Code.INTERNAL_SERVER_ERROR)
+      .send(
+        new HttpResponse(
+          Code.INTERNAL_SERVER_ERROR,
+          Status.INTERNAL_SERVER_ERROR,
+          'An error occurred'
+        )
+      );
+  }
+};

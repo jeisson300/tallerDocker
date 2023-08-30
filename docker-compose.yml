@@ -6,7 +6,7 @@ services:
     volumes:
       - ./dbinit/init.sql:/docker-entrypoint-initdb.d/0_init.sql
       # - ./mysql-dump:/docker-entrypoint-initdb.d
-      - $HOME/database:/var/lib/mysql
+      - $PWD/database:/var/lib/mysql
     ports:
       - 3307:3306
     expose:
