@@ -179,28 +179,39 @@ export const updateUser = async (
       req.originalUrl
     } Request from ${req.rawHeaders[0]} ${req.rawHeaders[1]}`
   );
+  // const {id} = req.body.user;
+
+  const { id } = req.body.user;
   let User: User = { ...req.body };
   try {
     const pool = await connection();
     const result: ResultSet = await pool.query(QUERY.SELECT_USER, [
       req.params.UserId,
     ]);
-
-    if ((result[0] as Array<ResultSet>).length > 0) {
-      const result: ResultSet = await pool.query(QUERY.UPDATE_USERS, [
-        ...Object.values(User),
-        req.params.UserId,
-      ]);
-      return res.status(Code.OK).send(
-        new HttpResponse(Code.OK, Status.OK, 'Users updated', {
-          ...User,
-          id: req.params.Userid,
-        })
-      );
+    const data = result[0] as Array<User>;
+    const { id: ID } = data[0];
+    console.log(ID);
+    if (id === ID) {
+      const salt = await bcrypt.genSalt(10);
+      User.password = await bcrypt.hash(User.password, salt);
+      if ((result[0] as Array<ResultSet>).length > 0) {
+        const result: ResultSet = await pool.query(QUERY.UPDATE_USERS, [
+          ...Object.values(User),
+          req.params.UserId,
+        ]);
+        return res.status(Code.OK).send(
+          new HttpResponse(Code.OK, Status.OK, 'Users updated', {
+            ...User,
+            id: req.params.Userid,
+          })
+        );
+      } else {
+        return res
+          .status(Code.OK)
+          .send(new HttpResponse(Code.OK, Status.OK, 'User not found'));
+      }
     } else {
-      return res
-        .status(Code.OK)
-        .send(new HttpResponse(Code.OK, Status.OK, 'User not found'));
+      throw new Error('NO ESTA AUTORIZADO, TOKEN INVALIDO');
     }
   } catch (error: unknown) {
     console.error(error);
