@@ -104,12 +104,11 @@ export const getUsers = async (
   try {
     const pool = await connection();
     const result: ResultSet = await pool.query(QUERY.SELECT_USERS);
+    console.log(result);
     const UsersData = result[0] as Array<User>;
     return res
       .status(Code.OK)
-      .send(
-        new HttpResponse(Code.OK, Status.OK, 'Users retrieved', UsersData[0])
-      );
+      .send(new HttpResponse(Code.OK, Status.OK, 'Users retrieved', UsersData));
   } catch (error: unknown) {
     console.error(error);
     return res
@@ -216,12 +215,12 @@ export const updateUser = async (
   } catch (error: unknown) {
     console.error(error);
     return res
-      .status(Code.INTERNAL_SERVER_ERROR)
+      .status(Code.NOT_AUTHORIZED)
       .send(
         new HttpResponse(
-          Code.INTERNAL_SERVER_ERROR,
-          Status.INTERNAL_SERVER_ERROR,
-          'An error occurred'
+          Code.NOT_AUTHORIZED,
+          Status.NOT_AUTHORIZED,
+          'NOT_AUTHORIZED'
         )
       );
   }

@@ -6,5 +6,5 @@ export const QUERY = {
     'UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ?,  status = ? WHERE id = ?',
   DELETE_USERS: 'DELETE FROM user WHERE id = ?',
   SELECT_USER: 'SELECT * FROM user WHERE id = ?',
-  SELECT_USERS: 'SELECT * FROM patients LIMIT 50',
+  SELECT_USERS: 'SELECT * FROM user LIMIT 50',
 };
