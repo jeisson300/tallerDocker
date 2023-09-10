@@ -7,6 +7,9 @@ import { HttpResponse } from '../domain/response';
 import { Status } from '../enum/status.enum';
 import { FieldPacket, ResultSetHeader, RowDataPacket } from 'mysql2';
 import { OkPacket } from 'mysql2';
+import { PatientValidationSchema } from '../validators/patient.validator';
+import * as yup from 'yup';
+
 
 type ResultSet = [
   RowDataPacket[] | RowDataPacket[] | OkPacket | OkPacket[] | ResultSetHeader,
@@ -33,7 +36,7 @@ export const getPatients = async (
           Code.OK,
           Status.OK,
           'Patients retrieved',
-          patientsData[0]
+          patientsData
         )
       );
   } catch (error: unknown) {
@@ -110,8 +113,11 @@ export const createPatient = async (
       req.originalUrl
     } Request from ${req.rawHeaders[0]} ${req.rawHeaders[1]}`
   );
-  let patient: Patient = { ...req.body };
   try {
+    const patientValidation = await PatientValidationSchema.validate(req.body, { abortEarly: false });
+    let patient: Patient = { ...req.body };
+
+
     const pool = await connection();
     const result: ResultSet = await pool.query(
       QUERY.CREATE_PATIENTS,
@@ -131,6 +137,15 @@ export const createPatient = async (
       );
   } catch (error: unknown) {
     console.error(error);
+
+    if (error instanceof yup.ValidationError) {
+      console.log(error);
+      return res.status(Code.BAD_REQUEST)
+        .send(
+          new HttpResponse(Code.BAD_REQUEST, Status.BAD_REQUEST, error.errors.join(',')
+          )
+        );
+    }
     return res
       .status(Code.INTERNAL_SERVER_ERROR)
       .send(

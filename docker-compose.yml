@@ -20,7 +20,13 @@ services:
     networks:
       - net
   api:
-    build: .
+    image: node:18
+    # working_dir: /home/node/app
+    # working_dir: //C:\\DISCO_D\\JEISSON\\RESPALDO_PC\\TRABAJOS U\\SEMESTRE 12\\MICRO SERVICIOS\\TALLER DOCKER\\TallerApiTs
+    # volumes: 
+    #   - ./:/home/node/app
+      # - //C:\\DISCO_D\\JEISSON\\RESPALDO_PC\\TRABAJOS U\\SEMESTRE 12\\MICRO SERVICIOS\\TALLER DOCKER\\TallerApiTs
+    command: "npm start"
     ports:
       - 3000:3000
     expose:
@@ -28,6 +34,7 @@ services:
     depends_on:
       - mysqldb
     environment:
+      NODE_ENV: production
       DB_HOST: mysqldb
       DB_USER: 'admin'
       DB_PASSWORD: 'elden'
@@ -49,6 +56,16 @@ services:
       - 8080
     networks:
       - net
+  swagger:
+    image: swaggerapi/swagger-editor
+    volumes: 
+      - ./:/tmp
+    environment:
+      - SWAGGER_FILE=/tmp/swagger.yml
+    ports:
+      - 3001:8080
+    expose:
+      - 3001
 networks:
   net:
     driver: bridge

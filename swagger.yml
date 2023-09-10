@@ -1,0 +1,599 @@
+openapi: 3.0.3
+info:
+  title: Documentacion api usuarios y pacientes
+  description: |-
+    Documentación de la api de usuarios y pacientes
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: Usuarios
+    description: Toda la gestion de usuarios
+
+  - name: Pacientes
+    description: Toda la gestion de los pacients
+
+paths:
+  /users:
+    post:
+      tags:
+        - Usuarios
+      summary: Crear usuario
+      description: Funcionalidad para crear usuarios dentro del sistema
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users'
+        required: true
+      responses:
+        '201':
+          description: Mensaje de usuario creado
+          
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: users created
+
+        '400':
+          description: Error enviando los parametros
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users_bad'
+          
+        '500':
+          description: Error desconocido
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: An error occurred
+                
+                
+  /users/login:
+    post:
+      tags:
+        - Usuarios
+      summary: Login de usuario
+      description: Funcionalidad autenticarse en el sistema
+      operationId: lginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_login'
+        required: true
+      responses:
+        '200':
+          description: Mensaje de usuario creado
+          
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/login_response'
+
+        '400':
+          description: Error enviando los parametros
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_login'
+                
+  /users/{userId}:
+    get:
+      tags:
+        - Usuarios
+      summary: Obtener un usuario
+      description: Obtiene la información de un usuario
+      operationId: getUser
+      parameters:
+        - name: auth-token
+          in: header
+          description: 'token de autenticación expedido en el login'
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: Id del usuario a buscar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Mensaje de usuario creado
+          
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/one_user_resp'
+
+        '400':
+          description: Error enviando los parametros
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/one_user_error'
+                
+    put:
+      tags:
+        - Usuarios
+      summary: Actualizar usuario
+      description: Funcionalidad para editar la información de un usuario dentro del sistema
+      operationId: updateUser
+      parameters:
+        - name: auth-token
+          in: header
+          description: 'token de autenticación expedido en el login'
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: Id del usuario a buscar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example: 'carlos'
+                last_name:
+                  type: string
+                  example: 'aguirre'
+                email:
+                  type: string
+                  example: 'carlos@ejemplo.co'
+                password:
+                  type: string
+                  example: '123'
+                id_role:
+                  type: integer
+                  example: 1
+                status:
+                  type: integer
+                  example: 1
+      responses:
+        '200':
+          description: Mensaje de usuario creado
+          
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/update_user_resp'
+        
+        '404':
+          description: El usuario con el id especificado no existe
+          
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 404
+                  httpStatus:
+                    type: string
+                    example: NOT_FOUND
+                  message:
+                    type: string
+                    example: User not found
+                  timestamp:
+                    type: string
+                    example: 9/9/2023, 10:30:36 PM
+        
+        '401':
+          description: El usuario no esta loggeado en el sistema o el token es inválido
+          
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: acceso denegado 
+
+    delete:
+      tags:
+        - Usuarios
+      summary: Eliminar usuario
+      description: Funcionalidad elimina un usuario dentro del sistema
+      operationId: deleteUser
+      parameters:
+        - name: auth-token
+          in: header
+          description: 'token de autenticación expedido en el login'
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: Id del usuario a buscar
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+      responses:
+        '200':
+          description: Mensaje de usuario creado
+          
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/one_user_deleted'
+        
+        '404':
+          description: El usuario con el id especificado no existe
+          
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 404
+                  httpStatus:
+                    type: string
+                    example: NOT_FOUND
+                  message:
+                    type: string
+                    example: User not found
+                  timestamp:
+                    type: string
+                    example: 9/9/2023, 10:30:36 PM
+        
+        '401':
+          description: El usuario no esta loggeado en el sistema o el token es inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: acceso denegado 
+  /patients:
+    post:
+      tags:
+        - Pacientes
+      summary: Crear pacientes
+      description: Funcionalidad para crear pacientes dentro del sistema
+      operationId: createPatient
+      parameters:
+        - name: auth-token
+          in: header
+          description: 'token de autenticación expedido en el login'
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_patient'
+                
+        required: true
+      responses:
+        '201':
+          description: Mensaje de usuario creado
+          
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/cre_patient_response'
+
+        '400':
+          description: Error enviando los parametros
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users_bad'
+          
+        '500':
+          description: Error desconocido, posiblemente el email este duplicado
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: An error occurred
+    get:
+      tags:
+        - Pacientes
+      summary: Obtener pacientes
+      description: Funcionalidad para obtener un listado de pacientes 
+      operationId: getPatients
+      parameters:
+        - name: auth-token
+          in: header
+          description: 'token de autenticación expedido en el login'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Mensaje de usuario creado
+          
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/list_patients_response'
+
+          
+        '500':
+          description: Error desconocido
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: An error occurred
+
+components:
+  schemas:
+    
+    users:
+      type: object
+      properties:
+
+        first_name:
+          type: string
+          example: carlos
+        last_name:
+          type: string
+          example: aguirre
+        email:
+          type: string
+          example: carlos@ejemplo.com
+        password:
+          type: string
+          example: mypassword@12
+        id_role:
+          type: integer
+          example: 1
+        status:
+          type: integer
+          example: 1
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: tag
+    
+    users_bad:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 400
+        httpStatus:
+          type: string
+          example: BAD_REQUEST
+        message:
+          type: string
+          example: el campo last_name es requerido
+        timestamp:
+          type: string
+          example: 9/9/2023, 10:30:36 PM
+    
+    users_login:
+      type: object
+      properties:
+        email:
+          type: string
+          example: carlos@email.com
+        password:
+          type: string
+          example: password123
+          
+    login_response:
+      type: object
+      properties:
+        error:
+          type: string
+          example: 
+        data:
+          type: object
+          example: 
+            token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2FybG9zIiwiaWQiOjEsImlhdCI6MTY5NDI5OTQ1MX0.JwqyDIG2M7MNo_bGdlPI8rmCki4tOY3KguTlj1x4Jow
+    error_login:
+      type: object
+      properties: 
+        error:
+          type: string
+          example: el campo \"password\" es requerido
+          
+    one_user_resp:
+      type: object
+      properties:
+        statusCode: 
+          type: integer
+          example: 200
+        httpStatus: 
+          type: string
+          example:     
+        message:
+          type: string
+          example: Users retrieved
+        data:
+          $ref: '#/components/schemas/users'
+          
+    one_user_deleted:
+      type: object
+      properties:
+        statusCode: 
+          type: integer
+          example: 200
+        httpStatus: 
+          type: string
+          example: OK  
+        message:
+          type: string
+          example: Users users deleted
+        timestamp:
+          type: string
+          example: 9/10/2023, 1:02:59 AM
+          
+    one_user_error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 400
+        httpStatus:
+          type: string
+          example: BAD_REQUEST
+        message:
+          type: string
+          example: User not found
+        timestamp:
+          type: string
+          example: 9/9/2023, 10:30:36 PM
+          
+    create_patient:
+      type: object
+      properties:
+        first_name:
+          type: string
+          example: paciente
+        last_name:
+          type: string
+          example: aguirre
+        email:
+          type: string
+          example: paciente4@mail.com
+        address:
+          type: string
+          example: calle 10A norte #10-36 t1 apto 905
+        phone:
+          type: string
+          example: 123456789
+        status:
+          type: integer
+          example: 1
+          
+          
+    update_user_resp:
+      type: object
+      properties:
+        statusCode: 
+          type: integer
+          example: 200
+        httpStatus: 
+          type: string
+          example: OK    
+        message:
+          type: string
+          example: Users updated
+        data:
+          type: object
+          properties:
+            first_name:
+              type: string
+              example: carlos
+            last_name:
+              type: string
+              example: aguirre
+            email:
+              type: string
+              example: carlos@ejemplo.com
+            password:
+              type: string
+              example: mypassword@12
+            id_role:
+              type: integer
+              example: 1
+            status:
+              type: integer
+              example: 1
+        timestamp: 
+          type: string
+          example: 9/9/2023, 11:58:57 PM
+    
+    cre_patient_response:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        httpStatus:
+          type: string
+          example: CREATED
+        message:
+          type: string
+          example: Patients created
+        data:
+          $ref: '#/components/schemas/list_patients_response'
+        timestamp: 
+          type: string
+          example: 9/9/2023, 11:58:57 PM
+          
+    patient_scheme:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        first_name:
+          type: string
+          example: carlos
+        last_name:
+          type: string
+          example: aguirre
+        email:
+          type: string
+          example: paciente5@mail.com
+        address:
+          type: string
+          example: calle 10A norte
+        phone:
+          type: string
+          example: 123456789
+        status:
+          type: integer
+          
+    list_patients_response:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        httpStatus:
+          type: string
+          example: CREATED
+        message:
+          type: string
+          example: Patients created
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/patient_scheme'
+            
+        timestamp: 
+          type: string
+          example: 9/9/2023, 11:58:57 PM
+        
+        
+    
+
+
+
+
