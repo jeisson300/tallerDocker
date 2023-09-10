@@ -6,35 +6,31 @@ import axios, { Axios } from 'axios';
 
 @binding()
 export class UserControlerSteps {
-  private _user: User = {
-    first_name: 'carlos',
-    last_name: 'aguirre',
-    email: 'carlos@hotmail.com',
-    password: '123',
-    id_role: 1,
-    status: 1,
-  };
+  email:String='';
+  password:String='';
+  error?:String;
 
-  private status: number = 0;
 
-  @given(/ password and email \$(\d*)/)
-  public givenUserSignIn(user: User) {
-    this._user = user;
+  @given('Dado un usuario: {string} contraseña: {string}')
+  public givenUserSignIn(user: String, password: String) {
+    this.email = user;
+    this.password = password;
   }
 
   @when(/\$(\d*) is sign in/)
-  public async deposit(user: User) {
-    const { email, password } = user;
+  public async deposit() {
+
     // fetch("http://localhost:3000/users/login",{email, password } , "POST")
     const data = await axios.post('http://localhost:3000/users/login', {
-      email,
-      password,
+      "email":this.email,
+      "password":this.password,
     });
     console.log(data);
+    //this.error = data.error;
   }
 
   @then(/ Get will response token \$(\d*)/)
-  public accountBalanceShouldEqual(token: string) {
+  public accountBalanceShouldEqual() {
     // assert.equal(this.accountBalance, token);
   }
 }

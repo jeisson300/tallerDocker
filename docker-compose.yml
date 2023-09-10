@@ -20,7 +20,13 @@ services:
     networks:
       - net
   api:
-    build: .
+    image: node:18
+    working_dir: /home/node/app
+    volumes: 
+      - ./:/home/node/app
+    command: "npm start"
+    environment:
+      - NODE_ENV=production
     ports:
       - 3000:3000
     expose:
@@ -49,6 +55,16 @@ services:
       - 8080
     networks:
       - net
+  swagger:
+    image: swaggerapi/swagger-editor
+    volumes: 
+      - ./:/tmp
+    environment:
+      - SWAGGER_FILE=/tmp/swagger.yml
+    ports:
+      - 3001:8080
+    expose:
+      - 3001
 networks:
   net:
     driver: bridge
