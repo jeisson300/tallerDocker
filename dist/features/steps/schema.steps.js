@@ -15,31 +15,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cucumber_1 = require("@cucumber/cucumber");
 const axios_1 = __importDefault(require("axios"));
 const chai_1 = require("chai");
-const faker_1 = require("@faker-js/faker");
-let email = '';
-let password = '';
-let _token = '';
-const randomPassword = faker_1.internet.password();
-const randomEmail = faker_1.internet.email();
-(0, cucumber_1.Given)('un login', () => {
+const ajv_1 = __importDefault(require("ajv"));
+const ajv = new ajv_1.default();
+let data = '';
+const schemaCorrect = {
+    type: 'object',
+    properties: {
+        error: {
+            type: 'null',
+        },
+        data: {
+            type: 'object',
+            properties: {
+                token: {
+                    type: 'string',
+                },
+            },
+            required: ['token'],
+        },
+    },
+    required: ['error', 'data'],
+};
+(0, cucumber_1.Given)('un inicio de sesion', () => {
     // Write code here that turns the phrase above into concrete actions
-/*     email = 'REX@hotmail.com';
-    password = '123'; */
-    email = randomEmail;
-    password = randomPassword;
+    data = '';
 });
-(0, cucumber_1.When)('se ingresa email y password', () => __awaiter(void 0, void 0, void 0, function* () {
+(0, cucumber_1.When)('se ingresa el usuario {string} y la contraseña {string}', (email, password) => __awaiter(void 0, void 0, void 0, function* () {
     // Write code here that turns the phrase above into concrete actions
     const resp = yield axios_1.default.post('http://localhost:3000/users/login', {
         email,
         password,
     });
-    const { data } = resp.data;
-    const { token } = data;
-    _token = token;
-    // console.log(token);
+    data = resp.data;
 }));
-(0, cucumber_1.Then)('devolvera un token', () => {
+(0, cucumber_1.Then)('estructura correcta del token', () => {
     // Write code here that turns the phrase above into concrete actions
-    chai_1.assert.isNotEmpty(_token);
+    const validate = ajv.compile(schemaCorrect);
+    // Validar la respuesta con el JSON Schema
+    const isValid = validate(data);
+    chai_1.assert.isTrue(isValid);
 });

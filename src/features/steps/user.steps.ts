@@ -1,14 +1,19 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import axios from 'axios';
 import { Assertion, assert } from 'chai';
+import { faker } from '@faker-js/faker'
 
 let email: String = '';
 let password: String = '';
 let _token: string = '';
+const randomPassword = faker.internet.password();
+const randomEmail = faker.internet.email();
 Given('un login', () => {
   // Write code here that turns the phrase above into concrete actions
-  email = 'REX@hotmail.com';
-  password = '123';
+  /*     email = 'REX@hotmail.com';
+    password = '123'; */
+  email = randomEmail;
+  password = randomPassword;
 });
 
 When('se ingresa email y password', async () => {
