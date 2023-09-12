@@ -21,7 +21,7 @@ When('se ingresa email y password', async () => {
   const { token } = data;
   _token = token;
 
-  console.log(token);
+  // console.log(token);
 });
 
 Then('devolvera un token', () => {

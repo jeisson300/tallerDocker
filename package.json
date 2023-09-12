@@ -7,7 +7,7 @@
     "start:build": "tsc -p .",
     "start:dev": "nodemon --exec ts-node src/index.ts",
     "start:prod": "tsc -p . && NODE_ENV=prod node dist/index.js",
-    "test": "tsc && cucumber-js dist/features",
+    "test": "tsc && ./node_modules/@cucumber/cucumber/bin/cucumber-js .src/features",
     "start": "npm install && tsc -p . && NODE_ENV=prod node dist/index.js"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.2",
+    "ajv": "^8.12.0",
     "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",

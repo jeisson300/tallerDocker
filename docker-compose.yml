@@ -23,10 +23,11 @@ services:
     image: node:18
     # working_dir: /home/node/app
     # working_dir: //C:\\DISCO_D\\JEISSON\\RESPALDO_PC\\TRABAJOS U\\SEMESTRE 12\\MICRO SERVICIOS\\TALLER DOCKER\\TallerApiTs
-    # volumes: 
+    # volumes:  
     #   - ./:/home/node/app
       # - //C:\\DISCO_D\\JEISSON\\RESPALDO_PC\\TRABAJOS U\\SEMESTRE 12\\MICRO SERVICIOS\\TALLER DOCKER\\TallerApiTs
-    command: "npm start"
+    # command: "npm start"
+    build: .
     ports:
       - 3000:3000
     expose:
