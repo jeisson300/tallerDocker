@@ -43,10 +43,9 @@ When(
       email,
       password,
     });
-    console.log(resp);
-    // const { data } = resp.data;
-    // const { token } = data;
-    // _token = token;
+    const { data } = resp.data;
+    const { token } = data;
+    _token = token;
 
     // console.log(token);
   }

@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { Assertion, assert } from 'chai';
 import Ajv, { ErrorObject } from 'ajv';
 import { schemaCorrectLogin } from '../json-schema/res-login';
@@ -33,12 +33,18 @@ Given('un inicio de sesion', () => {
 When(
   'se ingresa el usuario {string} y la contraseña {string}',
   async (email, password) => {
-    // Write code here that turns the phrase above into concrete actions
-    const resp = await axios.post('http://localhost:3000/users/login', {
-      email,
-      password,
-    });
-    data = resp.data;
+    try {
+      // Write code here that turns the phrase above into concrete actions
+      const resp = await axios.post('http://localhost:3000/users/login', {
+        email,
+        password,
+      });
+      data = resp.data;
+    } catch (error) {
+      data = error.response.data;
+    }
+
+    console.log(data);
   }
 );
 
