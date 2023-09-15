@@ -16,26 +16,27 @@ const cucumber_1 = require("@cucumber/cucumber");
 const axios_1 = __importDefault(require("axios"));
 const chai_1 = require("chai");
 const ajv_1 = __importDefault(require("ajv"));
+const res_login_1 = require("../json-schema/res-login");
 const ajv = new ajv_1.default();
 let data = '';
-const schemaCorrect = {
-    type: 'object',
-    properties: {
-        error: {
-            type: 'null',
-        },
-        data: {
-            type: 'object',
-            properties: {
-                token: {
-                    type: 'string',
-                },
-            },
-            required: ['token'],
-        },
+/* const schemaCorrect = {
+  type: 'object',
+  properties: {
+    error: {
+      type: 'null',
     },
-    required: ['error', 'data'],
-};
+    data: {
+      type: 'object',
+      properties: {
+        token: {
+          type: 'string',
+        },
+      },
+      required: ['token'],
+    },
+  },
+  required: ['error', 'data'],
+}; */
 (0, cucumber_1.Given)('un inicio de sesion', () => {
     // Write code here that turns the phrase above into concrete actions
     data = '';
@@ -50,7 +51,7 @@ const schemaCorrect = {
 }));
 (0, cucumber_1.Then)('estructura correcta del token', () => {
     // Write code here that turns the phrase above into concrete actions
-    const validate = ajv.compile(schemaCorrect);
+    const validate = ajv.compile(res_login_1.schemaCorrectLogin);
     // Validar la respuesta con el JSON Schema
     const isValid = validate(data);
     chai_1.assert.isTrue(isValid);

@@ -7,7 +7,7 @@
     "start:build": "tsc -p .",
     "start:dev": "nodemon --exec ts-node src/index.ts",
     "start:prod": "tsc -p . && NODE_ENV=prod node dist/index.js",
-    "test": "tsc && ./node_modules/@cucumber/cucumber/bin/cucumber-js .src/features",
+    "test": "tsc & ./node_modules/@cucumber/cucumber/bin/cucumber-js .src/features",
     "start": "npm install && tsc -p . && NODE_ENV=prod node dist/index.js"
   },
   "keywords": [],

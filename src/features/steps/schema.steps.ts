@@ -2,10 +2,11 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import axios from 'axios';
 import { Assertion, assert } from 'chai';
 import Ajv, { ErrorObject } from 'ajv';
+import { schemaCorrectLogin } from '../json-schema/res-login';
 const ajv = new Ajv();
 let data: string = '';
 
-const schemaCorrect = {
+/* const schemaCorrect = {
   type: 'object',
   properties: {
     error: {
@@ -22,7 +23,7 @@ const schemaCorrect = {
     },
   },
   required: ['error', 'data'],
-};
+}; */
 
 Given('un inicio de sesion', () => {
   // Write code here that turns the phrase above into concrete actions
@@ -43,7 +44,7 @@ When(
 
 Then('estructura correcta del token', () => {
   // Write code here that turns the phrase above into concrete actions
-  const validate = ajv.compile(schemaCorrect);
+  const validate = ajv.compile(schemaCorrectLogin);
   // Validar la respuesta con el JSON Schema
   const isValid = validate(data);
 

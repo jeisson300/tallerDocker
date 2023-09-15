@@ -15,13 +15,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cucumber_1 = require("@cucumber/cucumber");
 const axios_1 = __importDefault(require("axios"));
 const chai_1 = require("chai");
+const faker_1 = require("@faker-js/faker");
 let email = '';
 let password = '';
 let _token = '';
+const randomPassword = faker_1.faker.internet.password();
+const randomEmail = faker_1.faker.internet.email();
 (0, cucumber_1.Given)('un login', () => {
     // Write code here that turns the phrase above into concrete actions
-    email = 'REX@hotmail.com';
-    password = '123';
+    /*     email = 'REX@hotmail.com';
+      password = '123'; */
+    email = randomEmail;
+    password = randomPassword;
 });
 (0, cucumber_1.When)('se ingresa email y password', () => __awaiter(void 0, void 0, void 0, function* () {
     // Write code here that turns the phrase above into concrete actions
