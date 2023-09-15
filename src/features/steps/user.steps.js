@@ -19,12 +19,12 @@ const faker_1 = require("@faker-js/faker");
 let email = '';
 let password = '';
 let _token = '';
-const randomPassword = faker_1.internet.password();
-const randomEmail = faker_1.internet.email();
+const randomPassword = faker_1.faker.internet.password();
+const randomEmail = faker_1.faker.internet.email();
 (0, cucumber_1.Given)('un login', () => {
     // Write code here that turns the phrase above into concrete actions
-/*     email = 'REX@hotmail.com';
-    password = '123'; */
+    /*     email = 'REX@hotmail.com';
+      password = '123'; */
     email = randomEmail;
     password = randomPassword;
 });
@@ -37,7 +37,22 @@ const randomEmail = faker_1.internet.email();
     const { data } = resp.data;
     const { token } = data;
     _token = token;
-    // console.log(token);
+}));
+(0, cucumber_1.When)('se ingresa email {string} y password {string}', (_email, _password) => __awaiter(void 0, void 0, void 0, function* () {
+    // Write code here that turns the phrase above into concrete actions
+    // console.log(password);
+    if (_email.length > 0) {
+        email = _email;
+        password = _password;
+    }
+    const resp = yield axios_1.default.post('http://localhost:3000/users/login', {
+        email,
+        password,
+    });
+    console.log(resp);
+    // const { data } = resp.data;
+    // const { token } = data;
+    // _token = token;
 }));
 (0, cucumber_1.Then)('devolvera un token', () => {
     // Write code here that turns the phrase above into concrete actions
