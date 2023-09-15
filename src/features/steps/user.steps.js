@@ -45,14 +45,21 @@ const randomEmail = faker_1.faker.internet.email();
         email = _email;
         password = _password;
     }
-    const resp = yield axios_1.default.post('http://localhost:3000/users/login', {
+    let data;
+    data = yield axios_1.default
+        .post('http://localhost:3000/users/login', {
         email,
         password,
-    });
-    console.log(resp);
+    })
+        .catch((error) => __awaiter(void 0, void 0, void 0, function* () {
+        data = yield error.response.data;
+    }));
+    console.log(data);
+    // console.log(data);
     // const { data } = resp.data;
     // const { token } = data;
     // _token = token;
+    // console.log(token);
 }));
 (0, cucumber_1.Then)('devolvera un token', () => {
     // Write code here that turns the phrase above into concrete actions

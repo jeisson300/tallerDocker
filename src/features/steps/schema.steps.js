@@ -42,12 +42,18 @@ let data = '';
     data = '';
 });
 (0, cucumber_1.When)('se ingresa el usuario {string} y la contraseña {string}', (email, password) => __awaiter(void 0, void 0, void 0, function* () {
-    // Write code here that turns the phrase above into concrete actions
-    const resp = yield axios_1.default.post('http://localhost:3000/users/login', {
-        email,
-        password,
-    });
-    data = resp.data;
+    try {
+        // Write code here that turns the phrase above into concrete actions
+        const resp = yield axios_1.default.post('http://localhost:3000/users/login', {
+            email,
+            password,
+        });
+        data = resp.data;
+    }
+    catch (error) {
+        data = error.response.data;
+    }
+    console.log(data);
 }));
 (0, cucumber_1.Then)('estructura correcta del token', () => {
     // Write code here that turns the phrase above into concrete actions
