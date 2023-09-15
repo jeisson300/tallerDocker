@@ -15,53 +15,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cucumber_1 = require("@cucumber/cucumber");
 const axios_1 = __importDefault(require("axios"));
 const chai_1 = require("chai");
-const faker_1 = require("@faker-js/faker");
-let email = '';
-let password = '';
-let _token = '';
-const randomPassword = faker_1.faker.internet.password();
-const randomEmail = faker_1.faker.internet.email();
-(0, cucumber_1.Given)('un login', () => {
+const ajv_1 = __importDefault(require("ajv"));
+const resp_search_1 = require("../json-schema/resp-search");
+const ajv = new ajv_1.default();
+let data = '';
+(0, cucumber_1.Given)('un email, se buscara un email, si existe en la base de datos', () => {
     // Write code here that turns the phrase above into concrete actions
-    /*     email = 'REX@hotmail.com';
-      password = '123'; */
-    email = randomEmail;
-    password = randomPassword;
+    data = '';
 });
-(0, cucumber_1.When)('se ingresa email y password', () => __awaiter(void 0, void 0, void 0, function* () {
-    // Write code here that turns the phrase above into concrete actions
-    const resp = yield axios_1.default.post('http://localhost:3000/users/login', {
-        email,
-        password,
-    });
-    const { data } = resp.data;
-    const { token } = data;
-    _token = token;
-}));
-(0, cucumber_1.When)('se ingresa email {string} y password {string}', (_email, _password) => __awaiter(void 0, void 0, void 0, function* () {
-    // Write code here that turns the phrase above into concrete actions
-    // console.log(password);
-    if (_email.length > 0) {
-        email = _email;
-        password = _password;
+(0, cucumber_1.When)('se ingresa el usuario {string} y la contraseña {string}', (email, password) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // Write code here that turns the phrase above into concrete actions
+        const resp = yield axios_1.default.post('http://localhost:3000/users/login', {
+            email,
+            password,
+        });
+        data = resp.data;
     }
-    let data;
-    data = yield axios_1.default
-        .post('http://localhost:3000/users/login', {
-        email,
-        password,
-    })
-        .catch((error) => __awaiter(void 0, void 0, void 0, function* () {
-        data = yield error.response.data;
-    }));
-    console.log(data);
-    // console.log(data);
-    // const { data } = resp.data;
-    // const { token } = data;
-    // _token = token;
-    // console.log(token);
+    catch (error) {
+        data = error.response.data;
+    }
 }));
-(0, cucumber_1.Then)('devolvera un token', () => {
+(0, cucumber_1.Then)('el esquema es valido', () => {
     // Write code here that turns the phrase above into concrete actions
-    chai_1.assert.isNotEmpty(_token);
+    const validate = ajv.compile(resp_search_1.schemaSearch);
+    // Validar la respuesta con el JSON Schema
+    const isValid = validate(data);
+    chai_1.assert.isTrue(isValid);
 });

@@ -40,11 +40,9 @@ When(
         password,
       });
       data = resp.data;
-    } catch (error) {
+    } catch (error: any) {
       data = error.response.data;
     }
-
-    console.log(data);
   }
 );
 
