@@ -1,6 +1,6 @@
 Feature: inicio de sesion usuario
 
-  Scenario: validar si el email esta en la base de datos
-    Given un email, se buscara un email, si existe en la base de datos
-    When se ingresa el usuario "REX@hotmail.com" y la contraseña "123"
-    Then el esquema es valido
+  Scenario: validar si el usuario esta en la base de datos
+    Given un id, se validara si existe en la base de datos el usuario
+    When enviamos un id "1" de usuario, para buscar el usuario
+    Then hay informacion

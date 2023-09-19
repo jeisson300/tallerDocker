@@ -16,30 +16,27 @@ const cucumber_1 = require("@cucumber/cucumber");
 const axios_1 = __importDefault(require("axios"));
 const chai_1 = require("chai");
 const ajv_1 = __importDefault(require("ajv"));
-const resp_search_1 = require("../json-schema/resp-search");
 const ajv = new ajv_1.default();
-let data = '';
-(0, cucumber_1.Given)('un email, se buscara un email, si existe en la base de datos', () => {
+let user;
+(0, cucumber_1.Given)('un id, se validara si existe en la base de datos el usuario', () => {
     // Write code here that turns the phrase above into concrete actions
-    data = '';
 });
-(0, cucumber_1.When)('se ingresa el usuario {string} y la contraseña {string}', (email, password) => __awaiter(void 0, void 0, void 0, function* () {
+(0, cucumber_1.When)('enviamos un id {string} de usuario, para buscar el usuario', (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const headers = {
+            'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUkVYIiwiaWQiOjEsImlhdCI6MTY5NTE2NjUwNH0.TXlvCLNikLkR7U6JnvEWdB5NnRinFMUCuzdvfm3HvVE',
+            'Content-Type': 'application/json', // Ejemplo de encabezado de tipo de contenido
+        };
         // Write code here that turns the phrase above into concrete actions
-        const resp = yield axios_1.default.post('http://localhost:3000/users/login', {
-            email,
-            password,
+        const resp = yield axios_1.default.get(`http://localhost:3000/users/${id}`, {
+            headers,
         });
-        data = resp.data;
+        user = resp.data.data;
     }
     catch (error) {
-        data = error.response.data;
+        // data = error.response.data;
     }
 }));
-(0, cucumber_1.Then)('el esquema es valido', () => {
-    // Write code here that turns the phrase above into concrete actions
-    const validate = ajv.compile(resp_search_1.schemaSearch);
-    // Validar la respuesta con el JSON Schema
-    const isValid = validate(data);
-    chai_1.assert.isTrue(isValid);
+(0, cucumber_1.Then)('hay informacion', () => {
+    chai_1.assert.isNotEmpty(user);
 });

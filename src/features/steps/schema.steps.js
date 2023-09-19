@@ -53,7 +53,7 @@ let data = '';
     catch (error) {
         data = error.response.data;
     }
-    console.log(data);
+    // console.log(data);
 }));
 (0, cucumber_1.Then)('estructura correcta del token', () => {
     // Write code here that turns the phrase above into concrete actions
