@@ -6,25 +6,6 @@ import { schemaCorrectLogin } from '../json-schema/res-login';
 const ajv = new Ajv();
 let data: string = '';
 
-/* const schemaCorrect = {
-  type: 'object',
-  properties: {
-    error: {
-      type: 'null',
-    },
-    data: {
-      type: 'object',
-      properties: {
-        token: {
-          type: 'string',
-        },
-      },
-      required: ['token'],
-    },
-  },
-  required: ['error', 'data'],
-}; */
-
 Given('un inicio de sesion', () => {
   // Write code here that turns the phrase above into concrete actions
   data = '';
