@@ -13,13 +13,22 @@ import dotenv from 'dotenv';
 import { UserValidationSchema } from '../validators/user.validator';
 import * as yup from 'yup';
 import { LoginValidationSchema } from '../validators/login.validator';
+import { Kafka, KafkaConfig } from 'kafkajs';
+
+
+
 
 dotenv.config();
+
+const kafkaConfig: KafkaConfig = { brokers: ['kafka:9092'] }
+const kafka = new Kafka(kafkaConfig)
 
 type ResultSet = [
   RowDataPacket[] | RowDataPacket[] | OkPacket | OkPacket[] | ResultSetHeader,
   FieldPacket[]
 ];
+
+
 
 export const createUser = async (
   req: Request,
@@ -104,6 +113,9 @@ export const loginUser = async (
       'secreto'
     );
 
+    sendMessageLoginUser(user);
+
+
     return res.header('auth-token', token).json({
       error: null,
       data: { token },
@@ -124,6 +136,28 @@ export const loginUser = async (
 
 
 };
+
+
+const sendMessageLoginUser = async(user:User)=>{
+  const producer = kafka.producer()
+  await producer.connect()
+  await producer.send({
+    topic: 'test-topic',
+    messages: [
+      { 
+        headers: { source: 'patients-api' },
+        value: JSON.stringify({
+        appname: "Sistema médico",
+        logtype: "info",
+        date: new Date(),
+        module: "login",
+        resume: `login de usuario id:${user.id} email:${user.email}`,
+        description: `login de usuario id:${user.id} email:${user.email}`
+      } )},
+    ],
+  }).then(console.log)
+  .catch((e:Error) => console.error(`[example/producer] ${e.message}`, e))
+}
 
 export const getUsers = async (
   req: Request,
