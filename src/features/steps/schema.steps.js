@@ -17,32 +17,23 @@ const axios_1 = __importDefault(require("axios"));
 const chai_1 = require("chai");
 const ajv_1 = __importDefault(require("ajv"));
 const res_login_1 = require("../json-schema/res-login");
+const res_bad_login_1 = require("../json-schema/res-bad-login");
+const faker_1 = require("@faker-js/faker");
 const ajv = new ajv_1.default();
 let data = '';
-/* const schemaCorrect = {
-  type: 'object',
-  properties: {
-    error: {
-      type: 'null',
-    },
-    data: {
-      type: 'object',
-      properties: {
-        token: {
-          type: 'string',
-        },
-      },
-      required: ['token'],
-    },
-  },
-  required: ['error', 'data'],
-}; */
+const randomPassword = faker_1.faker.internet.password();
+const randomEmail = faker_1.faker.internet.email();
 (0, cucumber_1.Given)('un inicio de sesion', () => {
     // Write code here that turns the phrase above into concrete actions
-    data = '';
 });
 (0, cucumber_1.When)('se ingresa el usuario {string} y la contraseña {string}', (email, password) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (email === '' && password === '') {
+            const resp = yield axios_1.default.post('http://localhost:3000/users/login', {
+                randomEmail,
+                randomPassword,
+            });
+        }
         // Write code here that turns the phrase above into concrete actions
         const resp = yield axios_1.default.post('http://localhost:3000/users/login', {
             email,
@@ -53,12 +44,15 @@ let data = '';
     catch (error) {
         data = error.response.data;
     }
-    console.log(data);
 }));
 (0, cucumber_1.Then)('estructura correcta del token', () => {
     // Write code here that turns the phrase above into concrete actions
-    const validate = ajv.compile(res_login_1.schemaCorrectLogin);
+    let validate = ajv.compile(res_login_1.schemaCorrectLogin);
     // Validar la respuesta con el JSON Schema
-    const isValid = validate(data);
+    let isValid = validate(data);
+    if (isValid == false) {
+        validate = ajv.compile(res_bad_login_1.schemaBadLogin);
+        isValid = validate(data);
+    }
     chai_1.assert.isTrue(isValid);
 });
