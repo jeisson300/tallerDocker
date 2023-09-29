@@ -48,6 +48,17 @@ services:
       TOKEN_SECRET: secreto
     networks:
       - net
+  netc:
+    image: netc:v1
+    ports:
+      - 8081:80
+    expose:
+      - 80
+      - 443
+    environment:
+      TOKEN_SECRET: secreto
+    networks:
+      - net
   adminer:
     image: adminer
     restart: always
