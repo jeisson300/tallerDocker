@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApIConsumidor", "ApIConsumidor\ApIConsumidor.csproj", "{30BDD4DD-159E-40BC-A224-CBC62B61B57F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30BDD4DD-159E-40BC-A224-CBC62B61B57F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30BDD4DD-159E-40BC-A224-CBC62B61B57F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30BDD4DD-159E-40BC-A224-CBC62B61B57F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30BDD4DD-159E-40BC-A224-CBC62B61B57F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C27F746-115E-41E1-A45A-892F90F3DBE9}
+	EndGlobalSection
+EndGlobal
