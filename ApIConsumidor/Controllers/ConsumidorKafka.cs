@@ -14,7 +14,7 @@ namespace ApIConsumidor.Controllers
         {
             var config = new ConsumerConfig
             {
-                BootstrapServers = "kafka:9093", // Cambia esto al servidor y puerto de tu clúster Kafka
+                BootstrapServers = "kafka:9092", // Cambia esto al servidor y puerto de tu clúster Kafka
                 GroupId = "my-consumer-group",
                 AutoOffsetReset = AutoOffsetReset.Earliest, // Puedes configurar esto como "Latest" si deseas leer solo los nuevos eventos
             };
