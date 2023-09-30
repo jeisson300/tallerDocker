@@ -9,6 +9,14 @@ namespace ApIConsumidor.Controllers
     public class ConsumidorKafka: ControllerBase
     {
 
+        private readonly ILogger<ConsumidorKafka> _logger;
+
+        public ConsumidorKafka(ILogger<ConsumidorKafka> logger)
+        {
+            _logger = logger;
+        }
+
+
         [HttpGet]
         public void ConsumirKafka ()
         {
@@ -34,6 +42,7 @@ namespace ApIConsumidor.Controllers
                     //while (true)
                     //{
                         var result = consumer.Consume(cts.Token);
+                    _logger.LogInformation(result.Message.Value);
                         Console.WriteLine($"Consumido mensaje: {result.Message.Value}");
                     //}
                 }
