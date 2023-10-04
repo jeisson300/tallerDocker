@@ -1,0 +1,142 @@
+2023-10-03 19:06:07.707 -05:00 [INF] Now listening on: http://localhost:5072
+2023-10-03 19:06:07.748 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-10-03 19:06:07.749 -05:00 [INF] Hosting environment: Development
+2023-10-03 19:06:07.749 -05:00 [INF] Content root path: C:\DISCO_D\JEISSON\RESPALDO_PC\TRABAJOS U\SEMESTRE 12\MICRO SERVICIOS\TALLER DOCKER\ApIConsumidor\ApIConsumidor
+2023-10-03 19:06:09.479 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/swagger - -
+2023-10-03 19:06:09.778 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/swagger - - - 301 0 - 304.3855ms
+2023-10-03 19:06:09.812 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/swagger/index.html - -
+2023-10-03 19:06:10.203 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/swagger/index.html - - - 200 - text/html;charset=utf-8 390.5151ms
+2023-10-03 19:06:10.218 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/swagger/swagger-ui.css - -
+2023-10-03 19:06:10.233 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/swagger/swagger-ui-bundle.js - -
+2023-10-03 19:06:10.243 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/swagger/swagger-ui-standalone-preset.js - -
+2023-10-03 19:06:10.398 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/_vs/browserLink - -
+2023-10-03 19:06:10.433 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/_framework/aspnetcore-browser-refresh.js - -
+2023-10-03 19:06:10.453 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/_framework/aspnetcore-browser-refresh.js - - - 200 12358 application/javascript;+charset=utf-8 13.3845ms
+2023-10-03 19:06:10.460 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-10-03 19:06:10.460 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/swagger/swagger-ui.css - - - 200 144929 text/css 241.7665ms
+2023-10-03 19:06:10.522 -05:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2023-10-03 19:06:10.523 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/swagger/swagger-ui-standalone-preset.js - - - 200 312163 text/javascript 283.0849ms
+2023-10-03 19:06:10.532 -05:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2023-10-03 19:06:10.532 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/swagger/swagger-ui-bundle.js - - - 200 1061536 text/javascript 299.6343ms
+2023-10-03 19:06:10.595 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 207.5016ms
+2023-10-03 19:06:10.997 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/swagger/v1/swagger.json - -
+2023-10-03 19:06:11.495 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 498.5124ms
+2023-10-03 19:06:23.526 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5072/logs application/json 49
+2023-10-03 19:06:23.532 -05:00 [WRN] Failed to determine the https port for redirect.
+2023-10-03 19:06:23.542 -05:00 [INF] Executing endpoint 'ApIConsumidor.Controllers.ConsumidorKafka.GetLogs (ApIConsumidor)'
+2023-10-03 19:06:23.599 -05:00 [INF] Route matched with {action = "GetLogs", controller = "ConsumidorKafka"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLogs(ApIConsumidor.Model.DTO.LogsDTO) on controller ApIConsumidor.Controllers.ConsumidorKafka (ApIConsumidor).
+2023-10-03 19:07:33.520 -05:00 [INF] prueba
+2023-10-03 19:09:55.863 -05:00 [INF] Now listening on: http://localhost:5072
+2023-10-03 19:09:55.905 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-10-03 19:09:55.906 -05:00 [INF] Hosting environment: Development
+2023-10-03 19:09:55.906 -05:00 [INF] Content root path: C:\DISCO_D\JEISSON\RESPALDO_PC\TRABAJOS U\SEMESTRE 12\MICRO SERVICIOS\TALLER DOCKER\ApIConsumidor\ApIConsumidor
+2023-10-03 19:09:56.945 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/swagger/index.html - -
+2023-10-03 19:09:57.627 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/swagger/index.html - - - 200 - text/html;charset=utf-8 685.8499ms
+2023-10-03 19:09:57.701 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/_framework/aspnetcore-browser-refresh.js - -
+2023-10-03 19:09:57.707 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/_framework/aspnetcore-browser-refresh.js - - - 200 12358 application/javascript;+charset=utf-8 5.8613ms
+2023-10-03 19:09:57.707 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/_vs/browserLink - -
+2023-10-03 19:09:57.735 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 27.7548ms
+2023-10-03 19:09:58.059 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/swagger/v1/swagger.json - -
+2023-10-03 19:09:58.223 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 164.2783ms
+2023-10-03 19:10:10.218 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5072/logs application/json 49
+2023-10-03 19:10:10.236 -05:00 [WRN] Failed to determine the https port for redirect.
+2023-10-03 19:10:10.254 -05:00 [INF] Executing endpoint 'ApIConsumidor.Controllers.ConsumidorKafka.GetLogs (ApIConsumidor)'
+2023-10-03 19:10:10.311 -05:00 [INF] Route matched with {action = "GetLogs", controller = "ConsumidorKafka"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLogs(ApIConsumidor.Model.DTO.LogsDTO) on controller ApIConsumidor.Controllers.ConsumidorKafka (ApIConsumidor).
+2023-10-03 19:10:13.797 -05:00 [INF] prueba
+2023-10-03 19:10:43.000 -05:00 [INF] Now listening on: http://localhost:5072
+2023-10-03 19:10:43.041 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-10-03 19:10:43.042 -05:00 [INF] Hosting environment: Development
+2023-10-03 19:10:43.042 -05:00 [INF] Content root path: C:\DISCO_D\JEISSON\RESPALDO_PC\TRABAJOS U\SEMESTRE 12\MICRO SERVICIOS\TALLER DOCKER\ApIConsumidor\ApIConsumidor
+2023-10-03 19:10:43.796 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/swagger/index.html - -
+2023-10-03 19:10:44.191 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/swagger/index.html - - - 200 - text/html;charset=utf-8 400.2523ms
+2023-10-03 19:10:44.257 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/_vs/browserLink - -
+2023-10-03 19:10:44.262 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/_framework/aspnetcore-browser-refresh.js - -
+2023-10-03 19:10:44.274 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/_framework/aspnetcore-browser-refresh.js - - - 200 12358 application/javascript;+charset=utf-8 7.7045ms
+2023-10-03 19:10:44.296 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 39.0973ms
+2023-10-03 19:10:44.385 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5072/swagger/v1/swagger.json - -
+2023-10-03 19:10:44.529 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5072/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 143.6566ms
+2023-10-03 19:11:15.789 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5072/logs application/json 49
+2023-10-03 19:11:15.794 -05:00 [WRN] Failed to determine the https port for redirect.
+2023-10-03 19:11:15.798 -05:00 [INF] Executing endpoint 'ApIConsumidor.Controllers.ConsumidorKafka.GetLogs (ApIConsumidor)'
+2023-10-03 19:11:15.825 -05:00 [INF] Route matched with {action = "GetLogs", controller = "ConsumidorKafka"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLogs(ApIConsumidor.Model.DTO.LogsDTO) on controller ApIConsumidor.Controllers.ConsumidorKafka (ApIConsumidor).
+2023-10-03 19:11:15.874 -05:00 [INF] prueba
+2023-10-03 19:11:15.966 -05:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.IO.FileNotFoundException'.
+2023-10-03 19:11:15.990 -05:00 [INF] Executed action ApIConsumidor.Controllers.ConsumidorKafka.GetLogs (ApIConsumidor) in 161.5187ms
+2023-10-03 19:11:15.993 -05:00 [INF] Executed endpoint 'ApIConsumidor.Controllers.ConsumidorKafka.GetLogs (ApIConsumidor)'
+2023-10-03 19:11:15.995 -05:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances are not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances are not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCoreAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteCore[TValue](Utf8JsonWriter writer, TValue& value, JsonTypeInfo jsonTypeInfo, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-10-03 19:11:16.241 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5072/logs application/json 49 - 500 - text/plain;+charset=utf-8 456.9834ms
+2023-10-03 19:11:58.131 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5072/logs application/json 49
+2023-10-03 19:11:58.160 -05:00 [INF] Executing endpoint 'ApIConsumidor.Controllers.ConsumidorKafka.GetLogs (ApIConsumidor)'
+2023-10-03 19:11:58.161 -05:00 [INF] Route matched with {action = "GetLogs", controller = "ConsumidorKafka"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLogs(ApIConsumidor.Model.DTO.LogsDTO) on controller ApIConsumidor.Controllers.ConsumidorKafka (ApIConsumidor).
+2023-10-03 19:11:58.162 -05:00 [INF] prueba
+2023-10-03 19:11:58.213 -05:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.IO.IOException'.
+2023-10-03 19:11:58.220 -05:00 [INF] Executed action ApIConsumidor.Controllers.ConsumidorKafka.GetLogs (ApIConsumidor) in 59.6515ms
+2023-10-03 19:11:58.221 -05:00 [INF] Executed endpoint 'ApIConsumidor.Controllers.ConsumidorKafka.GetLogs (ApIConsumidor)'
+2023-10-03 19:11:58.223 -05:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances are not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances are not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCoreAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteCore[TValue](Utf8JsonWriter writer, TValue& value, JsonTypeInfo jsonTypeInfo, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-10-03 19:11:58.227 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5072/logs application/json 49 - 500 - text/plain;+charset=utf-8 99.0526ms
+2023-10-03 19:12:43.134 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5072/logs application/json 49
+2023-10-03 19:12:43.147 -05:00 [INF] Executing endpoint 'ApIConsumidor.Controllers.ConsumidorKafka.GetLogs (ApIConsumidor)'
+2023-10-03 19:12:43.151 -05:00 [INF] Route matched with {action = "GetLogs", controller = "ConsumidorKafka"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLogs(ApIConsumidor.Model.DTO.LogsDTO) on controller ApIConsumidor.Controllers.ConsumidorKafka (ApIConsumidor).
+2023-10-03 19:12:43.155 -05:00 [INF] prueba
