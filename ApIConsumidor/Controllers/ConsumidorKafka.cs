@@ -69,20 +69,21 @@ namespace ApIConsumidor.Controllers
         {
             string logContent = "";
             List<string> listacontenido = new();
+            int contador = 1;
             for (DateTime fechaActual = logs.FechaInicial; fechaActual <= logs.FechaFinal; fechaActual = fechaActual.AddDays(1))
             {
                 try
                 {
                     string fechainicial = logs.FechaInicial.ToString("yyyyMMdd");
                     string fechaFinal = logs.FechaFinal.ToString("yyyyMMdd");
-
-
-
                     logContent = System.IO.File.ReadAllText($"log/appLogs{fechaActual.ToString("yyyyMMdd")}.txt").ToString();
-
-
                     //listacontenido.Add();
                     listacontenido = validarLog(logContent, logs.tipolog);
+                    contador++;
+                    if(contador == logs.paginacion)
+                    {
+                        break;
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -6,5 +6,8 @@
         public DateTime FechaFinal { get; set; }
 
         public string tipolog { get; set; }
+
+
+        public int paginacion { get; set; }
     }
 }
