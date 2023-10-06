@@ -95,6 +95,25 @@ namespace ApIConsumidor.Controllers
             return Ok(new { contenido = listacontenido });
         }
 
+        [HttpPost("createlog")]
+        public IActionResult CreateLog([FromBody] CreateLogDTO createlog)
+        {
+            if(createlog.tipo.Equals("INF"))
+            {
+                _logger.LogInformation(createlog.log);
+            }
+            else if(createlog.tipo.Equals("WRN"))
+            {
+                _logger.LogWarning(createlog.log);
+            }
+            else
+            {
+                _logger.LogError(createlog.log);
+            }
+
+            return Ok(createlog);
+        }
+
         private List<string> validarLog(string logContent, string tipolog)
         {
             string pattern = @$"\[{tipolog}\]"; // Expresión regular para capturar el texto dentro de los corchetes [INF]
