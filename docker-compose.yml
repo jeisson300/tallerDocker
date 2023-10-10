@@ -37,6 +37,7 @@ services:
     environment:
       NODE_ENV: production
       DB_HOST: mysqldb
+      LOGS_HOST: netc
       DB_USER: 'admin'
       DB_PASSWORD: 'elden'
       DB_NAME: tallerapi
