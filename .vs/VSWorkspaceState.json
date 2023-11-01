@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ApiGateway",
+    "\\ApiGateway\\Controllers",
+    "\\ApiGateway\\DTO"
+  ],
+  "SelectedNode": "\\ApiGateway\\ApiGateway.csproj",
+  "PreviewInSolutionExplorer": false
+}
