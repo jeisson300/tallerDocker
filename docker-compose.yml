@@ -1,0 +1,128 @@
+services:
+  mysqldb:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    volumes:
+      - ./dbinit/init.sql:/docker-entrypoint-initdb.d/0_init.sql
+    ports:
+      - 3307:3306
+    expose:
+      - 3306
+    environment:
+      MYSQL_DATABASE: tallerapi
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: elden
+      MYSQL_ROOT_PASSWORD: elden
+      SERVICE_TAGS: prod
+      SERVICE_NAME: mysqldb
+    networks:
+      - net
+  mysqldbapi:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    volumes:
+      - ./api-profile/profiledb.sql:/docker-entrypoint-initdb.d/0_init.sql
+    ports:
+      - 3308:3306
+    expose:
+      - 3306
+    environment:
+      MYSQL_DATABASE: user_profile
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: elden
+      MYSQL_ROOT_PASSWORD: elden
+      SERVICE_TAGS: prod
+      SERVICE_NAME: mysqldb
+    networks:
+      - net
+  api:
+    image: node:18
+    build: .
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    depends_on:
+      - mysqldb
+    environment:
+      NODE_ENV: production
+      DB_HOST: mysqldb
+      LOGS_HOST: netc
+      DB_USER: 'admin'
+      DB_PASSWORD: 'elden'
+      DB_NAME: tallerapi
+      DB_PORT: 3306
+      DB_CONNECTION_LIMIT: 10
+      SERVER_PORT: 3000
+      SERVICE_TAGS: prod
+      SERVICE_NAME: nodeappserver
+      TOKEN_SECRET: secreto
+    networks:
+      - net
+  netc:
+    image: jeissonleal03/netc:v6
+    ports:
+      - 8081:80
+    expose:
+      - 80
+      - 443
+    environment:
+      TOKEN_SECRET: secreto
+    networks:
+      - net
+  gateway:
+    image: jonastat/gateway:v4
+    ports:
+      - 8087:80
+    expose:
+      - 80
+      - 443
+    environment:
+      TOKEN_SECRET: secreto
+    networks:
+      - net
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    networks:
+      - net
+  swagger:
+    image: swaggerapi/swagger-editor
+    volumes: 
+      - ./:/tmp
+    environment:
+      - SWAGGER_FILE=/tmp/swagger.yml
+    ports:
+      - 3001:8080
+    expose:
+      - 3001
+  kafka:
+    image: 'bitnami/kafka:latest'
+    networks:
+      - net
+    environment:
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+  apiprofile:
+    image: 'alcalbg/php5.6-apache'
+    volumes:
+      - ./api-profile:/var/www/html
+    ports:
+      - 8082:80
+    expose:
+      - 80
+    networks:
+      - net
+networks:
+  net:
+    driver: bridge
