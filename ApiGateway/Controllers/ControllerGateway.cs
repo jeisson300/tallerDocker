@@ -94,7 +94,7 @@ namespace ApiGateway.Controllers
         }
 
         [HttpGet("obtenerUsuario")]
-        public IActionResult obtenerUsuario(int id, string authToken)
+        public IActionResult obtenerUsuario(int id, [FromHeader] string authToken)
         {
             var client = new RestClient();
             var request = new RestRequest("http://api:3000/users/" + id, Method.Get);
@@ -106,7 +106,7 @@ namespace ApiGateway.Controllers
         }
 
         [HttpPut("actualizarUsuario")]
-        public IActionResult actualizarUsuario(int id, string authToken, [FromBody] AuthUserDTO authUserDTO)
+        public IActionResult actualizarUsuario(int id, [FromHeader] string authToken, [FromBody] AuthUserDTO authUserDTO)
         {
             var client = new RestClient();
             var request = new RestRequest("http://api:3000/users/" + id, Method.Put);
@@ -132,7 +132,7 @@ namespace ApiGateway.Controllers
         }
 
         [HttpDelete("eliminarUsuario")]
-        public IActionResult eliminarUsuario(int id, string authToken)
+        public IActionResult eliminarUsuario(int id, [FromHeader] string authToken)
         {
             var client = new RestClient();
             var request = new RestRequest("http://api:3000/users/" + id, Method.Delete);
